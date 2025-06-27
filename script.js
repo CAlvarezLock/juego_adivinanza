@@ -31,8 +31,14 @@ function verificarNumero() {
             boton.disabled = true;
             break;
         } else {
-            salidaHTML = "Intento incorrecto. Te quedan " + (maxIntentos - i) + " intentos. ";
+            var intentosRestantes = maxIntentos - i; // Agrego una variable
+            // Personalizar el mensaje según la cantidad de intentos
+            if (intentosRestantes === 1) {
+                salidaHTML = "Intento incorrecto. Te queda 1 intento. "; // En singular
+            } else {
+                salidaHTML = "Intento incorrecto. Te quedan " + intentosRestantes + " intentos. "; // En plural
             break;
+            }
         }
     }
 
