@@ -1,7 +1,6 @@
-
 // Variables globales para mantener el estado del juego
 var numeroAleatorio = Math.floor(Math.random() * 10) + 1;
-var i = 0; // Contador de intentos (usaremos esta variable)
+var intentos = 0; // Cambié el nombre de 'i' a 'intentos' para más claridad
 var maxIntentos = 3;
 var boton = document.querySelector("button");
 
@@ -17,29 +16,21 @@ function verificarNumero() {
     }
 
     // Incrementar contador de intentos
-    i++;
+    intentos++;
 
-    // Fase 2: Proceso - Verificar adivinanza con while
-    var adivinado = false;
-    while (!adivinado && i <= maxIntentos) {
-        if (num === numeroAleatorio) {
-            salidaHTML = "¡Correcto! Has adivinado el número.";
-            boton.disabled = true;
-            adivinado = true;
-        } else if (i >= maxIntentos) {
-            salidaHTML = "Juego terminado. El número era: " + numeroAleatorio + ".";
-            boton.disabled = true;
-            break;
-        } else {
-            var intentosRestantes = maxIntentos - i; // Agrego una variable
-            // Personalizar el mensaje según la cantidad de intentos
-            if (intentosRestantes === 1) {
-                salidaHTML = "Intento incorrecto. Te queda 1 intento. "; // En singular
-            } else {
-                salidaHTML = "Intento incorrecto. Te quedan " + intentosRestantes + " intentos. "; // En plural
-            break;
-            }
-        }
+    // Fase 2: Proceso - Verificar adivinanza
+    if (num === numeroAleatorio) {
+        salidaHTML = "¡Correcto! Has adivinado el número.";
+        boton.disabled = true;
+    } else if (intentos >= maxIntentos) {
+        salidaHTML = "Juego terminado. El número era: " + numeroAleatorio + ".";
+        boton.disabled = true;
+    } else {
+        var intentosRestantes = maxIntentos - intentos;
+        // Mensaje personalizado según los intentos restantes
+        salidaHTML = "Intento incorrecto. Te " + 
+                     (intentosRestantes === 1 ? "queda 1 intento" : "quedan " + intentosRestantes + " intentos") + 
+                     ".";
     }
 
     // Fase 3: Salida
